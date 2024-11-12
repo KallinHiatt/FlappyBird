@@ -26,6 +26,9 @@ while True:
         if event.type == pygame.KEYDOWN:
             if event.key == pygame.K_SPACE and game.active:
                 game.flap()
+            
+            if event.key == pygame.K_SPACE and game.active == False:
+                game.restart()
         
 
         if event.type == SPAWNPIPE:
@@ -33,6 +36,7 @@ while True:
         
         if event.type == SPAWNBILL:
             game.add_bill()
+        
 
 
 
@@ -46,6 +50,11 @@ while True:
         game.check_collision()
         game.move_bill()
         game.show_bill(screen)
+        game.update_score()
+        game.show_score("playing", screen, (255,255,255))
+    
+    else:
+        game.game_over(screen, (255, 255, 255))
 
     game.show_ground(screen)
     game.move_ground()
