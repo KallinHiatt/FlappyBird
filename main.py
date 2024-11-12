@@ -8,9 +8,12 @@ screen = pygame.display.set_mode((400, 720))
 clock = pygame.time.Clock()
 
 SPAWNPIPE = pygame.USEREVENT
-pygame.time.set_timer(SPAWNPIPE, 2000)
+SPAWNBILL = pygame.USEREVENT
 
-game = Game('img/bird.png', 'img/pipe.png', 'img/background.png', 'img/ground.png')
+pygame.time.set_timer(SPAWNPIPE, 2000)
+pygame.time.set_timer(SPAWNBILL, 3000)
+
+game = Game('img/bird.png', 'img/pipe.png', 'img/background.png', 'img/ground.png', 'img/bill.png')
 game.resize_images()
 
 
@@ -27,6 +30,9 @@ while True:
 
         if event.type == SPAWNPIPE:
             game.add_pipe()
+        
+        if event.type == SPAWNBILL:
+            game.add_bill()
 
 
 
@@ -38,6 +44,8 @@ while True:
         game.move_pipe()
         game.show_pipes(screen)
         game.check_collision()
+        game.move_bill()
+        game.show_bill(screen)
 
     game.show_ground(screen)
     game.move_ground()

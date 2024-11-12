@@ -2,12 +2,13 @@ import pygame
 import random
 
 class Game:
-    def __init__(self, bird_img, pipe_img, background_img, ground_img):
+    def __init__(self, bird_img, pipe_img, background_img, ground_img, bill_img):
         self.bird = pygame.image.load(bird_img).convert_alpha()
         self.bird_rect = self.bird.get_rect(center = (70, 180))
         self.pipe = pygame.image.load(pipe_img).convert_alpha()
         self.background = pygame.image.load(background_img).convert_alpha()
         self.ground = pygame.image.load(ground_img).convert_alpha()
+        self.bill_pic = pygame.image.load(bill_img).convert_alpha()
         self.ground_position = 0
         self.active = True
         self.gravity = 0.08
@@ -15,12 +16,15 @@ class Game:
         self.rotated_bird = pygame.Surface((0,0))
         self.pipes = []
         self.pipe_height = [280, 425, 562, 500, 400, 290]
+        self.bills = []
+        self.bill_height = [200, 400, 500, 300]
 
     def resize_images(self):
         self.bird = pygame.transform.scale(self.bird, (51, 34))
         self.pipe = pygame.transform.scale(self.pipe, (80, 438))
         self.background = pygame.transform.scale(self.background, (400, 720))
         self.ground = pygame.transform.scale(self.ground, (470, 160))
+        self.bill = pygame.transform.scale(self.bill, (80, 42))
 
     def show_background(self, screen):
         screen.blit(self.background, (0,0))
@@ -69,6 +73,22 @@ class Game:
             else:
                 flip_pipe = pygame.transform.flip(self.pipe, False, True)
                 screen.blit(flip_pipe, pipe)
+    
+    def add_bill(self):
+        random_bill_pos = random.choice(self.bill_height)
+        bill = self.pipe.get_rect(midtop = (600, random_bill_pos))
+        self.bills.append(bill)
+    
+    def move_bill(self):
+        for bill in self.bills:
+            bill.centerx -= 3
+            if bill.centerx <= -40:
+                self.bills.remove(bill)
+    
+    def show_bill(self, screen):
+        for bill in self.bills:
+            screen.blit(self.bill, bill)
+
     
     def check_collision(self):
         for pipe in self.pipes:
