@@ -11,7 +11,7 @@ class Game:
         self.bill = pygame.image.load(bill_img).convert_alpha()
         self.ground_position = 0
         self.active = True
-        self.gravity = 0.08
+        self.gravity = 0.07
         self.bird_movement = 0
         self.rotated_bird = pygame.Surface((0,0))
         self.pipes = []
@@ -27,7 +27,7 @@ class Game:
         self.pipe = pygame.transform.scale(self.pipe, (80, 438))
         self.background = pygame.transform.scale(self.background, (400, 720))
         self.ground = pygame.transform.scale(self.ground, (470, 160))
-        self.bill = pygame.transform.scale(self.bill, (70, 52))
+        self.bill = pygame.transform.scale(self.bill, (70, 32))
 
     def show_background(self, screen):
         screen.blit(self.background, (0,0))
@@ -54,7 +54,7 @@ class Game:
 
     def flap(self):
         self.bird_movement = 0
-        self.bird_movement -= 3.0
+        self.bird_movement -= 4.0
     
     def add_pipe(self):
         random_pipe_pos = random.choice(self.pipe_height)
