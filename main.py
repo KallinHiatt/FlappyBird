@@ -37,7 +37,7 @@ while True:
         if event.type == SPAWNBILL:
             game.add_bill()
         
-        game.show_background(screen)
+    game.show_background(screen)
 
 
 
