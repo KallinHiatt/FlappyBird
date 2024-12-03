@@ -81,7 +81,7 @@ class Game:
     
     def add_bill(self):
         random_bill_pos = random.choice(self.bill_height)
-        bill = self.pipe.get_rect(midtop = (600, random_bill_pos))
+        bill = self.bill.get_rect(midtop = (600, random_bill_pos))
         self.bills.append(bill)
     
     def move_bill(self):
