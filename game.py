@@ -42,8 +42,6 @@ class Game:
     
     def show_bird(self, screen):
         screen.blit(self.rotated_bird, self.bird_rect)
-        print(f"this is the rectangle {self.bird_rect}")
-        print(f"this is the bird {self.rotated_bird}")
 
     def update_bird(self):
         self.bird_movement += self.gravity
